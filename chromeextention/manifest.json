@@ -1,0 +1,13 @@
+{
+  "manifest_version": 2,
+  "name": "Ligo shortenURL powered by bsShortURL",
+  "description": "Ligo shortenURL powered by bsShortURL - http://ligo.kr/p5",
+  "version": "1.0",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "http://jsonp.ligo.kr/", "tabs", "clipboardWrite"
+  ]
+}
