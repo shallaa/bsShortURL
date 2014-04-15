@@ -108,6 +108,13 @@ def createLigo(count):
     return ''.join(key)
 
 def fetchLink(link):
+    link = link.split('/', 3)
+
+    if len(link) < 3:
+        return 'Invalid string.'
+
+    link = 'http://' + link[2]
+
     try:
         urlfetch.fetch(link)
     except InvalidMethodError, e:
