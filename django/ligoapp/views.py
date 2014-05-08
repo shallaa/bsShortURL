@@ -2,4 +2,4 @@
 from django.http import HttpResponse
 
 def main_page(request):
-    return HttpResponse('hello.')
+    return HttpResponse('hello. this is test.')
