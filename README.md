@@ -40,9 +40,7 @@ bs 단축 URL 서비스
 ## 환경
 
 * Google App Engine
-
 * Django
-
 * Python
 
 ## 시작하기
