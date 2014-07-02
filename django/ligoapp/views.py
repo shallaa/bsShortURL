@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from django.http import HttpResponse
+from django.shortcuts import render_to_response
 
 def main_page(request):
-    return HttpResponse('hello. this is test. test.')
+    return render_to_response('index.html', {})
