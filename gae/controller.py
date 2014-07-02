@@ -182,7 +182,7 @@ def insertLink(url):
         entity.link = url
             
     if entity.ligo is None:
-        count = 2
+        count = 3
         num = 0
         
         while True:
