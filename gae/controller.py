@@ -21,7 +21,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 ligoKeys = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 
             's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
 
-allowDomains = ('topuit.naver.com', 'nhncorp.com')
+allowDomains = ('naver.com', 'nhncorp.com')
 DOMAIN = 'ligo.kr'
 
 def insertLog(log):
@@ -116,7 +116,7 @@ def fetchLink(link):
     link = 'http://' + link[2]
 
     try:
-        urlfetch.fetch(link)
+        res = urlfetch.fetch(link, follow_redirects=True, deadline=None)
     except InvalidMethodError, e:
         insertLog(e)
         
@@ -145,18 +145,22 @@ def fetchLink(link):
         insertLog(e)
         
         return 'Unknown error'
-        
+
+    #print(res.status_code)
+    #print(res.final_url)
     return 'ok'
 
 def insertLink(url):
     if url == None or url == '' or url == 'null':
         insertLog('Link is Empty')
         return 'Enter the URL.'
-    
+
+    '''
     if DOMAIN in url:
         insertLog('Already shortened URL')
         return 'Already shortened URL'
-    
+    '''
+
     allow = False
     
     for domain in allowDomains:
@@ -236,13 +240,14 @@ class MainHandler(webapp2.RequestHandler):
                 return
 
             doRenderJsonP(self, callback, insertLink(url))
-            return;
+            return
             
         try:
             linkKey = str(self.request.path)
         except Exception, e:
             insertLog(e)
             doRender(self, "index.html")
+            return
         
         if linkKey.startswith('/'):
             linkKey = linkKey[1:]
